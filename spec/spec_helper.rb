@@ -1,6 +1,8 @@
 require 'bundler/setup'
 require 'webmock/rspec'
 require 'vcr'
+require 'coveralls'
+Coveralls.wear!
 
 require_relative '../lib/velov.rb'
 
