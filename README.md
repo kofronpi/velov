@@ -25,16 +25,15 @@ You can fetch data of all stations in one call:
 
 Use an array to navigate through the data:
     
-    total_available_bikes += 0
+    total_available_bikes = station_list.to_a.map(&:available_bikes).inject(:+)
 
-    station_list.to_a.each do |station|
-      total_available_bikes += station.available_bikes
-    end
-
-You can find a specific station by its ID:
+### Play with one station
+You can find a specific station with its ID:
 
     station = Velov::Station.find_by_number(10117)
-    
+    station.lat
+    station.lng
+
 ## Contributing
 
 1. Fork it ( http://github.com/pbechu/velov/fork )
