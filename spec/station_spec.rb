@@ -2,12 +2,37 @@ require "spec_helper"
 
 describe Velov::Station do
   describe ":fetch" do
-    before(:each) do
-      VCR.use_cassette "fetch_valid_station_by_number" do
-        @station = Velov::Station.fetch(10117)
+    context 'a valid number' do
+      before(:each) do
+        VCR.use_cassette "fetch_valid_station_by_number" do
+          @station = Velov::Station.fetch(10117)
+        end
       end
+
+      it { expect(@station.number).to eq 10117}
+      it { expect(@station.name).to eq "La Pérralière"}
+      it { expect(@station.address).to eq "171 rue Léon Blum"}
+      it { expect(@station.address_complement).to eq "None"}
+      it { expect(@station.city).to eq "VILLEURBANNE"}
+      it { expect(@station.district_number).to eq 117}
+      it { expect(@station.lat).to eq 45.7645636665294000}
+      it { expect(@station.lng).to eq 4.8923336071821100}
+      it { expect(@station.bike_stands).to eq 22}
+      it { expect(@station.status).to eq "OPEN"}
+      it { expect(@station.available_bike_stands).to eq 11}
+      it { expect(@station.available_bikes).to eq 11}
+      it { expect(@station.last_update).to eq DateTime.new(2014,8,21,14,1,21) }
+      
     end
 
-    it { expect(@station.number).to eq 10117}
-  end 
+    context 'an invalid number' do
+      before(:each) do
+        VCR.use_cassette "fetch_invalid_station_by_number" do
+          @station = Velov::Station.fetch(101173456)
+        end
+      end
+
+      it { expect(@station).to be nil}
+    end
+  end
 end

@@ -1,5 +1,6 @@
 module Velov
   class API
+    # DRY API Calls
     def self.get(params = {})
       connection ||= Faraday.new 'https://download.data.grandlyon.com' do |conn|
         conn.response :json, :content_type => /\bjson$/

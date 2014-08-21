@@ -18,9 +18,10 @@ module Velov
       @list
     end
 
-    def self.fetch
+    # Fetch data of all stations
+    def self.fetch(params = {})
 
-      response = API.get
+      response = API.get(params)
 
       station_list = StationList.new(response.body["nb_results"])
       
