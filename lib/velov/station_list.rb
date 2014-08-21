@@ -32,5 +32,23 @@ module Velov
       station_list
     end
 
+    def nearest(lat,lng)
+      @list.sort_by do |station|
+        Geocoder::Calculations.distance_between([lat,lng], [station.lat,station.lng])
+      end
+    end
+
+    def bike_stands
+      @list.map(&:bike_stands).inject(:+)
+    end
+
+    def available_bike_stands
+      @list.map(&:available_bike_stands).inject(:+)
+    end
+
+    def available_bikes
+      @list.map(&:available_bikes).inject(:+)
+    end
+
   end
 end

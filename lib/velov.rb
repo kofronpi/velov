@@ -1,6 +1,7 @@
 require 'virtus'
 require 'faraday'
 require 'faraday_middleware'
+require 'geocoder'
 require "velov/version"
 require "velov/api"
 require "velov/station"
