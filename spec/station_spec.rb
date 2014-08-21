@@ -1,11 +1,11 @@
 require "spec_helper"
 
 describe Velov::Station do
-  describe ":fetch" do
-    context 'a valid number' do
+  describe ":find_by_number" do
+    context 'valid number' do
       before(:each) do
-        VCR.use_cassette "fetch_valid_station_by_number" do
-          @station = Velov::Station.fetch(10117)
+        VCR.use_cassette "find_valid_station_by_number" do
+          @station = Velov::Station.find_by_number(10117)
         end
       end
 
@@ -19,16 +19,16 @@ describe Velov::Station do
       it { expect(@station.lng).to eq 4.8923336071821100}
       it { expect(@station.bike_stands).to eq 22}
       it { expect(@station.status).to eq "OPEN"}
-      it { expect(@station.available_bike_stands).to eq 11}
-      it { expect(@station.available_bikes).to eq 11}
-      it { expect(@station.last_update).to eq DateTime.new(2014,8,21,14,1,21) }
+      it { expect(@station.available_bike_stands).to eq 12}
+      it { expect(@station.available_bikes).to eq 10}
+      it { expect(@station.last_update).to eq DateTime.new(2014,8,21,14,50,31) }
       
     end
 
-    context 'an invalid number' do
+    context 'invalid number' do
       before(:each) do
-        VCR.use_cassette "fetch_invalid_station_by_number" do
-          @station = Velov::Station.fetch(101173456)
+        VCR.use_cassette "find_invalid_station_by_number" do
+          @station = Velov::Station.find_by_number(101173456)
         end
       end
 
