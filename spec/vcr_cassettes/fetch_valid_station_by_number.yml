@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov/all.json?field=number&value=10117
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 21 Aug 2014 11:26:42 GMT
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "{\"fields\": [\"number\", \"name\", \"address\", \"address2\", \"commune\",
+        \"nmarrond\", \"bonus\", \"pole\", \"lat\", \"lng\", \"bike_stands\", \"status\",
+        \"available_bike_stands\", \"available_bikes\", \"availabilitycode\", \"availability\",
+        \"banking\", \"gid\", \"last_update\", \"last_update_fme\"], \"nb_results\":
+        1, \"values\": [[\"10117\", \"La P\\u00e9rrali\\u00e8re\", \"171 rue L\\u00e9on
+        Blum\", \"None\", \"VILLEURBANNE\", \"117\", \"Non\", \"Centre de quartier,
+        commerces\", \"45.7645636665294000\", \"4.8923336071821100\", \"22\", \"OPEN\",
+        \"12\", \"10\", \"1\", \"Vert\", \"True\", \"922\", \"2014-08-21 13:23:51\",
+        \"2014-08-21 13:26:01\"]], \"layer_name\": \"jcd_jcdecaux.jcdvelov\", \"table_href\":
+        \"https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov.json\",
+        \"field_name\": \"gid\"}"
+    http_version: 
+  recorded_at: Thu, 21 Aug 2014 11:26:43 GMT
+recorded_with: VCR 2.9.2

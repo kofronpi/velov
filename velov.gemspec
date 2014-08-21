@@ -1,0 +1,31 @@
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'velov/version'
+
+Gem::Specification.new do |spec|
+  spec.name          = "velov"
+  spec.version       = Velov::VERSION
+  spec.authors       = ["Pierre-Baptiste Béchu"]
+  spec.email         = ["pb.bechu+git@gmail.com"]
+  spec.summary       = %q{Write a short summary. Required.}
+  spec.description   = %q{Write a longer description. Optional.}
+  spec.homepage      = ""
+  spec.license       = "MIT"
+
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.5"
+  spec.add_development_dependency "rake" 
+  spec.add_development_dependency "rspec", '~> 2.99'
+  spec.add_development_dependency "vcr", '~> 2.9'
+  spec.add_development_dependency "webmock", '~> 1.18'
+ 
+
+  spec.add_runtime_dependency     "faraday", '~> 0.9'
+  spec.add_runtime_dependency     "faraday_middleware", '~> 0.9'
+  spec.add_runtime_dependency     "virtus", '~> 1.0'
+end
