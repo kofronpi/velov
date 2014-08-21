@@ -13,7 +13,7 @@ describe Velov::StationList do
   end
 
   describe ":nearest" do
-    it { expect(@station_list.nearest(45.7645636665294000,4.8923336071821100).first.number).to eq 10117 }
+    it { expect(@station_list.nearest(45.764563,4.892333).first.number).to eq 10117 }
   end
 
   describe "sums" do

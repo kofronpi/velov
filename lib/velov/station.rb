@@ -36,5 +36,9 @@ module Velov
       # nil if not found
       StationList.fetch({ "field" => "number", "value" => number}).to_a.first
     end
+
+    def distance_to(lat,lng)
+      Geocoder::Calculations.distance_between([@lat,@lng], [lat,lng])
+    end
   end
 end

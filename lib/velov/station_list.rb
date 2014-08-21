@@ -34,7 +34,7 @@ module Velov
 
     def nearest(lat,lng)
       @list.sort_by do |station|
-        Geocoder::Calculations.distance_between([lat,lng], [station.lat,station.lng])
+        station.distance_to(lat,lng)
       end
     end
 

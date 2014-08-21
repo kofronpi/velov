@@ -35,4 +35,14 @@ describe Velov::Station do
       it { expect(@station).to be nil}
     end
   end
+
+  describe ':distance_to' do
+    before(:each) do
+      VCR.use_cassette "find_valid_station_by_number" do
+        @station = Velov::Station.find_by_number(10117)
+      end
+    end
+
+    it { expect(@station.distance_to(45.8,4.9)).to eq 2.4761240501617032 }
+  end
 end
