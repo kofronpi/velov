@@ -2,6 +2,12 @@
 
 Velov is a ruby wrapper for [Velov API](https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov.json) (Public Bike Sharing System of Lyon, France). This Wrapper allows you to play with objects like bike's stations ! It's possible to add more features in the future, like "nearest station around me".
 
+[![Gem Version](https://badge.fury.io/rb/velov.svg)](http://badge.fury.io/rb/velov)
+[![Build Status](https://travis-ci.org/pbechu/velov.svg?branch=v0.1.4)](https://travis-ci.org/pbechu/velov)
+[![Coverage Status](https://img.shields.io/coveralls/pbechu/velov.svg)](https://coveralls.io/r/pbechu/velov?branch=master)
+[![Code Climate](https://codeclimate.com/github/pbechu/velov/badges/gpa.svg)](https://codeclimate.com/github/pbechu/velov)
+[![Dependency Status](https://gemnasium.com/pbechu/velov.svg)](https://gemnasium.com/pbechu/velov)
+
 ## Installation
 
 Add this line to your application's Gemfile:
