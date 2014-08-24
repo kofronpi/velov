@@ -46,7 +46,7 @@ module Velov
     end
 
     def distance_to(lat,lng)
-      Geocoder::Calculations.distance_between([@lat,@lng], [lat,lng])
+      Geocoder::Calculations.distance_between([@lat,@lng], [lat,lng], units: :km)
     end
   end
 end

@@ -48,6 +48,6 @@ describe Velov::Station do
       end
     end
 
-    it { expect(@station.distance_to(45.8,4.9)).to eq 2.4761240501617032 }
+    it { expect(@station.distance_to(45.8,4.9)).to eq 3.9849353849054903 }
   end
 end
