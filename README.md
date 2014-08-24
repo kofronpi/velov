@@ -1,6 +1,6 @@
 # Velov
 
-Velov is a ruby wrapper for [Velov API](https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov.json) (Public Bike Sharing System of Lyon, France). This Wrapper allows you to play with objects like bike's stations ! It's possible to add more features in the future, like "nearest station around me".
+Velov is a ruby wrapper for [Velov API](https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov.json) (Public Bike Sharing System of Lyon, France). This Wrapper allows you to play with objects like bike's stations !
 
 [![Gem Version](https://badge.fury.io/rb/velov.svg)](http://badge.fury.io/rb/velov)
 [![Build Status](https://travis-ci.org/pbechu/velov.svg?branch=v0.1.4)](https://travis-ci.org/pbechu/velov)
@@ -12,37 +12,96 @@ Velov is a ruby wrapper for [Velov API](https://download.data.grandlyon.com/ws/s
 
 Add this line to your application's Gemfile:
 
-    gem 'velov'
+```ruby
+gem 'velov'
+```
 
 And then execute:
 
-    $ bundle
+```console
+bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install velov
+```console
+gem install velov
+```
 
 ## Usage
 
-### Retrieve all stations
-You can fetch data of all stations in one call:
-    
-    station_list = Velov::StationList.fetch    
+### Start with the Velov API
 
-Use an array to navigate through the data:
-    
-    total_available_bikes = station_list.to_a.map(&:available_bikes).inject(:+)
+Fetch data of all stations in one call:
 
-### Play with one station
-You can find a specific station with its ID:
+```ruby
+station_list = Velov::StationList.fetch
+station_list.size # => 349
+```
 
-    station = Velov::Station.find_by_number(10117)
-    station.lat
-    station.lng
+Navigate through the data with an Array of Station:
+
+```ruby
+stations = station_list.to_a
+
+stations.each do |station|
+    puts station.name
+end
+```
+
+### Play with stations
+
+Find a specific station with its internal ID:
+
+```ruby
+station = Velov::Station.find_by_number(10117)
+station.status # => "OPEN"
+```
+
+Want more attributes ? Try one of these for a station:
+- number (internal ID)
+- name
+- address
+- address_complement
+- city
+- district_number
+- [bonus](http://www.velov.grandlyon.com/FAQ-Question-Reponse.59+M55f945504e2.0.html)
+- position (some indications to find the station)
+- lat (latitude)
+- lng (longitude)
+- bike_stands (count of bike stands at this station)
+- status ("OPEN" or "CLOSED")
+- available_bike_stands (free slots)
+- available_bikes ([ready to ride ?](http://www.annivelov.fr/))
+- availability_code (internal usage)
+- availability_label (internal usage)
+- last_update (last time data were updated)
+
+### Use the data
+
+Get reports for a list of stations:
+
+```ruby
+station_list.bike_stands # => 6832
+station_list.available_bike_stands # => 3534
+station_list.available_bikes # => 3022
+```
+
+Discover if you can reach a specific station:
+
+```ruby
+station.distance_to(45.8,4.9) # => 2.48 (km)
+```
+
+Find the nearest stations around you:
+
+```ruby
+station_list.nearest(45.8,4.9)
+```
 
 ## Contributing
 
-1. Fork it ( http://github.com/pbechu/velov/fork )
+1. [Fork it](http://github.com/pbechu/velov/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
