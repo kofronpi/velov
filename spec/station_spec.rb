@@ -16,12 +16,16 @@ describe Velov::Station do
       it { expect(@station.address_complement).to eq "None"}
       it { expect(@station.city).to eq "VILLEURBANNE"}
       it { expect(@station.district_number).to eq 117}
+      it { expect(@station.bonus).to eq false}
+      it { expect(@station.position).to eq "Centre de quartier, commerces"}
       it { expect(@station.lat).to eq 45.7645636665294000}
       it { expect(@station.lng).to eq 4.8923336071821100}
       it { expect(@station.bike_stands).to eq 22}
       it { expect(@station.status).to eq "OPEN"}
       it { expect(@station.available_bike_stands).to eq 12}
       it { expect(@station.available_bikes).to eq 10}
+      it { expect(@station.availability_code).to eq 1}
+      it { expect(@station.availability_label).to eq "Vert"}
       it { expect(@station.last_update).to eq DateTime.new(2014,8,21,14,50,31) }
       
     end
