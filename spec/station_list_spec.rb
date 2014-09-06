@@ -21,4 +21,9 @@ describe Velov::StationList do
     it { expect(@station_list.available_bike_stands).to eq 3544}
     it { expect(@station_list.available_bikes).to eq 3031}
   end
+
+  describe ":walking_distance" do
+    it { expect(@station_list.walking_distance([45.760,4.89],[45.76,4.83])).to eq 0.09376409039870806 }
+    it { expect(@station_list.walking_distance([45.7645636665294000,4.8923336071821100],[45.7635730869941000,4.8319018373465500])).to_not eq 0 }
+  end
 end

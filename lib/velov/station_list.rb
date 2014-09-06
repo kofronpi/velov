@@ -50,5 +50,15 @@ module Velov
       @list.map(&:available_bikes).inject(:+)
     end
 
+    def walking_distance(start, arrival)
+      start_station = self.nearest(start.first, start.last).find do |station|
+        station.status == "OPEN" and station.available_bikes > 0
+      end
+      arrival_station = self.nearest(arrival.first, arrival.last).find do |station|
+        station.status == "OPEN" and station.available_bike_stands > 0
+      end
+      start_station.distance_to(start.first, start.last) + arrival_station.distance_to(arrival.first, arrival.last)
+    end
+
   end
 end

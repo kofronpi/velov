@@ -99,6 +99,12 @@ Find the nearest stations around you:
 station_list.nearest(45.8,4.9)
 ```
 
+Know the distance you will walk in a specified trip
+
+```ruby
+station_list.walking_distance([45.8,4.9],[46.1,4.8])
+```
+
 ## Contributing
 
 1. [Fork it](http://github.com/pbechu/velov/fork)
