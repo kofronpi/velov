@@ -2,16 +2,14 @@ module Velov
   class StationList
     include Virtus.model
 
-    attribute :size, Integer
-    attribute :list, Array[Station]
-    
-    def initialize(size)
-      @size = size
-      @list = []
-    end
+    attribute :list, Array[Station], default: []
 
     def add_station(params)
       @list << Station.new(params)
+    end
+
+    def size
+      @list.size
     end
 
     def to_a
@@ -20,16 +18,9 @@ module Velov
 
     # Fetch data of all stations
     def self.fetch(params = {})
-
       response = API.get(params)
 
-      station_list = StationList.new(response.body["nb_results"])
-      
-      response.body["values"].each do |station_params|
-        station_list.add_station(station_params)
-      end
-
-      station_list
+      build_list(response.body)
     end
 
     def nearest(lat,lng)
@@ -59,6 +50,22 @@ module Velov
       end
       start_station.distance_to(start.first, start.last) + arrival_station.distance_to(arrival.first, arrival.last)
     end
+
+    def self.from_json(json)
+      build_list(JSON.parse(json))
+    end
+
+    private
+      def self.build_list(data)
+        station_list = StationList.new
+        
+        data["values"].each do |station_params|
+          station_list.add_station(station_params)
+        end
+
+        station_list
+      end
+
 
   end
 end

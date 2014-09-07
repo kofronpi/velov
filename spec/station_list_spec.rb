@@ -6,8 +6,18 @@ describe Velov::StationList do
       @station_list = Velov::StationList.fetch
     end
   end
+
+  describe ":from_json" do
+    before(:each) do
+      VCR.use_cassette "fetch_json_valid_station_list" do
+        @json = open("https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov/all.json").read
+      end
+    end
+    it { expect(Velov::StationList.from_json(@json).size).to eq 349 }
+    it { expect(Velov::StationList.from_json(@json).to_a.first.city).to eq "Lyon 7 ème" }
+  end
+
   describe ":fetch" do
-    
     it { expect(@station_list.size).to eq 349 }
     it { expect(@station_list.to_a.length).to eq 349}
   end
