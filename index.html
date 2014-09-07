@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VelovMap by @pbechu - Using data of JCDecaux API</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.css" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.min.js"></script>
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    html, body, #map {
+      height: 100%;
+    }
+    .city-name {
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    var map = L.map('map').setView([45.757540, 4.832126], 14);
+
+    var greenMarker = L.AwesomeMarkers.icon({
+      prefix: 'fa',
+      icon: 'star',
+      markerColor: 'green'
+    });
+
+    var redMarker = L.AwesomeMarkers.icon({
+      prefix: 'fa',
+      icon: 'bicycle',
+      markerColor: 'red'
+    });
+
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>, ' +
+        'Imagery &copy; <a href="http://mapbox.com" target="_blank">Mapbox</a>' + 
+        ' | Powered by &copy; <a href="https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov.json" target="_blank">JCDecaux API</a>' +
+        ' | Authored by <a href="https://twitter.com/pbechu" target="_blank">@pbechu</a>',
+      id: 'examples.map-i86knfo3'
+    }).addTo(map);
+
+    data = $.getJSON("data.json", function(json) {
+      $.each(json.values, function(index, station) {
+        if(station[11] == "OPEN") {
+          L.marker([station[8], station[9]], {icon: station[6] == "Oui"  ? greenMarker : redMarker, riseOnHover: true}).addTo(map);
+        }
+      });
+    });
+
+
+
+  </script>
+</body>
+</html>
