@@ -39,6 +39,11 @@ station_list = Velov::StationList.fetch
 station_list.size # => 349
 ```
 
+Build a list from an existing json string:
+```ruby
+station_list = Velov::StationList.from_json(json)
+```
+
 Navigate through the data with an Array of Station:
 
 ```ruby
