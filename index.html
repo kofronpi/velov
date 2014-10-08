@@ -45,11 +45,10 @@
       markerColor: 'red'
     });
 
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>, ' +
-        'Imagery &copy; <a href="http://mapbox.com" target="_blank">Mapbox</a>' + 
         ' | Powered by &copy; <a href="https://download.data.grandlyon.com/ws/smartdata/jcd_jcdecaux.jcdvelov.json" target="_blank">JCDecaux API</a>' +
         ' | Authored by <a href="https://twitter.com/pbechu" target="_blank">@pbechu</a>',
       id: 'examples.map-i86knfo3'
