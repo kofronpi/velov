@@ -2,13 +2,12 @@ require 'virtus'
 require 'faraday'
 require 'faraday_middleware'
 require 'geocoder'
-require "velov/version"
-require "velov/api"
-require "velov/station"
-require "velov/station_list"
-
+require 'velov/version'
+require 'velov/api'
+require 'velov/station'
+require 'velov/station_list'
+# Define API Constants
 module Velov
-  # Define API Constants
   NUMBER = 0
   NAME = 1
   ADDRESS = 2

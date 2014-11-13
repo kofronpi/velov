@@ -1,8 +1,31 @@
 module Velov
+  # A Velo'v station list
   class StationList
     include Virtus.model
 
     attribute :list, Array[Station], default: []
+
+    # Fetch data of all stations
+    def self.fetch(params = {})
+      response = API.get(params)
+
+      build_list(response.body)
+    end
+
+    def self.from_json(json)
+      build_list(JSON.parse(json))
+    end
+
+    def self.build_list(data)
+      station_list = StationList.new
+
+      data['values'].each do |station_params|
+        station_list.add_station(station_params)
+      end
+
+      station_list
+    end
+    private_class_method :build_list
 
     def add_station(params)
       @list << Station.new(params)
@@ -16,16 +39,9 @@ module Velov
       @list
     end
 
-    # Fetch data of all stations
-    def self.fetch(params = {})
-      response = API.get(params)
-
-      build_list(response.body)
-    end
-
-    def nearest(lat,lng)
+    def nearest(lat, lng)
       @list.sort_by do |station|
-        station.distance_to(lat,lng)
+        station.distance_to(lat, lng)
       end
     end
 
@@ -42,30 +58,14 @@ module Velov
     end
 
     def walking_distance(start, arrival)
-      start_station = self.nearest(start.first, start.last).find do |station|
-        station.status == "OPEN" and station.available_bikes > 0
+      start_station = nearest(start.first, start.last).find do |station|
+        station.status == 'OPEN' && station.available_bikes > 0
       end
-      arrival_station = self.nearest(arrival.first, arrival.last).find do |station|
-        station.status == "OPEN" and station.available_bike_stands > 0
+      arrival_station = nearest(arrival.first, arrival.last).find do |station|
+        station.status == 'OPEN' && station.available_bike_stands > 0
       end
-      start_station.distance_to(start.first, start.last) + arrival_station.distance_to(arrival.first, arrival.last)
+      start_station.distance_to(start.first, start.last) +
+        arrival_station.distance_to(arrival.first, arrival.last)
     end
-
-    def self.from_json(json)
-      build_list(JSON.parse(json))
-    end
-
-    private
-      def self.build_list(data)
-        station_list = StationList.new
-        
-        data["values"].each do |station_params|
-          station_list.add_station(station_params)
-        end
-
-        station_list
-      end
-
-
   end
 end

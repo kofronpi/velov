@@ -1,4 +1,5 @@
 module Velov
+  # A Velo'v station
   class Station
     include Virtus.model
 
@@ -27,7 +28,7 @@ module Velov
       @address_complement = params[Velov::ADDRESS_COMPLEMENT]
       @city = params[Velov::CITY]
       @district_number = params[Velov::DISTRICT_NUMBER].to_i
-      @bonus = params[Velov::BONUS] == "Oui"
+      @bonus = params[Velov::BONUS] == 'Oui'
       @position = params[Velov::POSITION]
       @lat = params[Velov::LATITUDE].to_f
       @lng = params[Velov::LONGITUDE].to_f
@@ -40,13 +41,17 @@ module Velov
       @last_update = DateTime.parse(params[Velov::LAST_UPDATE])
     end
 
+    # Find a bike Station.
+    #
+    # @param [Integer] station number
+    # @return [Station] Station object, nil if not found
     def self.find_by_number(number)
-      # nil if not found
-      StationList.fetch({ "field" => "number", "value" => number}).to_a.first
+      StationList.fetch('field' => 'number', 'value' => number).to_a.first
     end
 
-    def distance_to(lat,lng)
-      Geocoder::Calculations.distance_between([@lat,@lng], [lat,lng], units: :km)
+    def distance_to(lat, lng)
+      Geocoder::Calculations.distance_between([@lat, @lng], [lat, lng],
+                                              units: :km)
     end
   end
 end
